@@ -13,9 +13,9 @@ This project analyzes the Janasia Clothing using SQL to extract insights and add
 - Analyze each channels's price performance to maximize profitability.
 
 ## Tasks:
-- Set up workspace: Download CSV files and import to database that was created using Azure Data Studio.
-- Defining objectives and questions: understanding the business problems, identifying the data needed to address it, and defining the metrics or indicators to measure the outcomes.
-- Data cleaning: check errors and inconsistencies data, and correcting or removing them, ensures the quality and reliability of the data.
+- Set up workspace: download CSV files and import to database that was created using Azure Data Studio.
+- Defining objectives and questions: understand the business problems, identify the data needed, define the metrics to measure the outcomes.
+- Data cleaning: check errors and inconsistencies to correct the data, ensures the quality and reliability of the data.
 - Data analysis: answer objective questions, discover patterns, relationships, trends. Focus on optimizing the query to reduce the running time.
 - Upload to Github's repository.
 
