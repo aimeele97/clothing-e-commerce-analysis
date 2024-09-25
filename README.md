@@ -3,7 +3,7 @@
 ![image.jpg](https://github.com/Aimee-Le/EcommerceSalesAnalysis/blob/main/logo.jpg)
 
 ## Overview
-This project analyzes the Janasia Clothing using SQL to extract insights and address key business questions. The following README summarizes the project's objectives, challenges, solutions, findings, and conclusions.
+This project analyzes the Janasia clothing using SQL to extract insights and address key business questions. The following README summarizes the project's objectives, challenges, solutions, findings, and conclusions.
 
 ## Objectives
 
@@ -324,5 +324,3 @@ ORDER BY YEAR DESC, MONTH DESC, Stock
 - **Content Categorization:**
 
 This analysis provides a comprehensive view of E-commerce clothing business's sales performance to drive business decision-making.
-
-**Thank you for your time to review and consiration !**
