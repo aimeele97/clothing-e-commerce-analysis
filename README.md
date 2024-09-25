@@ -7,10 +7,10 @@ This project analyzes the Janasia clothing using SQL to extract insights and add
 
 ## Objectives
 
-- Identify sale trends by months, customers, categories, channels, locations.
-- Compare international sales and domestic sales orders, quantity, gross amount for business's expansion.
-- Explore the best courier to use in term of quality control, cost, delivery time.
-- Analyze each channels's price performance to maximize profitability.
+- **Sales trend**: Analyze trends by month/year, market, product category, quantity, promotion, location, and customer classification to  to identify high-performing and those needing improvement.
+- **Stock management**: Extract monthly product sales data and stock levels to ensure timely restocking. Identify products eligible for promotion or clearance to reduce storage costs, and recommend solutions to enhance product performance.
+- **Geography and customer classification**: Identify how customer preferences vary by geography to tailor product offerings and marketing strategies.
+- **Order fulfillment**: Uncover order volumes by fulfillment to identify locations and services fulfilled by a single provider, determine whether to explore alternative providers for contingency plans or to consolidate services with one provider to reduce costs.
 
 ## Tasks:
 - Set up workspace: download CSV files and import to database that was created using Azure Data Studio.
@@ -18,6 +18,14 @@ This project analyzes the Janasia clothing using SQL to extract insights and add
 - Data cleaning: check errors and inconsistencies to correct the data, ensures the quality and reliability of the data.
 - Data analysis: answer objective questions, discover patterns, relationships, trends. Focus on optimizing the query to reduce the running time.
 - Upload to Github's repository.
+
+## Findings and Conclusion
+
+- **Content Distribution:** 
+
+- **Geographical Insights:**
+
+- **Content Categorization:**
 
 ## Dataset
 
@@ -85,14 +93,6 @@ JOIN Products pro
 GROUP BY ama.Category, ama.Size, pro.Color
 ORDER BY Quantity desc;
 ```
-### Question 5: Top sales by sizes
-```sql
-SELECT Size, sum(Qty) as Quantity, sum(TotalAmount) TotalSales
-FROM SalesGlobal2022
-GROUP BY Size
-ORDER BY TotalSales desc;
-```
-
 ### Question 5: Number of order fulfil by Amazon and Merchant, shipping service level
 ```sql
 SELECT  Fulfilment, fulfilled_by, ship_service_level, COUNT(Qty) TotalOrders
@@ -222,7 +222,7 @@ SELECT *,
 FROM City
 ORDER BY ship_state
 ```
-### Question 13:  Extract the states that only Amazon or Merchant fulfilment
+### Question 13: Extract the states that only Amazon or Merchant fulfilment
 ```sql
 WITH City as (
     SELECT ship_state, Fulfilment, count(Order_ID) as NumberOrders 
@@ -315,12 +315,5 @@ GROUP BY Month, Year, Category, Stock, SKU
 ORDER BY YEAR DESC, MONTH DESC, Stock
 ```
 
-## Findings and Conclusion
-
-- **Content Distribution:** 
-
-- **Geographical Insights:**
-
-- **Content Categorization:**
-
 This analysis provides a comprehensive view of E-commerce clothing business's sales performance to drive business decision-making.
+
