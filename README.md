@@ -1,5 +1,4 @@
-# E-commerce sales data analysis using Microsoft SQL Server
-
+# E-commerce sales analysis
 ![image.jpg](https://github.com/Aimee-Le/e_commerce_sale_analysis/blob/main/logosale.png)
 
 ## Overview
