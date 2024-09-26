@@ -1,6 +1,6 @@
 # E-commerce sales data analysis using Microsoft SQL Server
 
-![image.jpg](https://github.com/Aimee-Le/EcommerceSalesAnalysis/blob/main/logo.jpg)
+![image.jpg](https://github.com/Aimee-Le/e_commerce_sale_analysis)
 
 ## Overview
 This project analyzes the Janasia clothing using SQL to extract insights and address key business questions. The following README summarizes the project's objectives, challenges, solutions, findings, and conclusions.
