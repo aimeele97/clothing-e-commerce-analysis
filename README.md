@@ -1,6 +1,5 @@
-# E-commerce sales data analysis using Microsoft SQL Server
-
-![image.jpg](https://github.com/Aimee-Le/EcommerceSalesAnalysis/blob/main/logo.jpg)
+# E-commerce sales analysis
+![image.jpg](https://github.com/Aimee-Le/e_commerce_sale_analysis/blob/main/logosale.png)
 
 ## Overview
 This project analyzes Janasia, an e-commerce clothing store based in India, **the datasets combine revenue from sales through Amazon and are divided into international and national sales, along with current stock levels data.** **15 business questions were formulated** to assess the store's performance and extract valuable insights. The goal is to identify strategies that can help improve and expand the business.
