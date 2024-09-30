@@ -42,8 +42,6 @@ The data for this project is sourced from the Kaggle dataset:
 - **Dataset Link:** [E-Commerce Dataset](https://www.kaggle.com/datasets/thedevastator/unlock-profits-with-e-commerce-sales-data/data?)
 Here's your document with consistent question markers and improved clarity:
 
----
-
 ## Business Questions
 
 - [Q1: International sales by month and year](#q1-international-sales-by-month-and-year)
