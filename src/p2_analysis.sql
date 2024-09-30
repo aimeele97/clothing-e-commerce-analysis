@@ -1,25 +1,26 @@
 -- E-COMMERCE SALE ANALYSIS - PART 2
 
--- Question 8: Total orders, sales by Status, delivery type
+-- Question 8: Total orders and sales by status 
 
-SELECT Status, 
-    ship_service_level,
+SELECT Status,
     SUM(Qty) TotalQuantity, 
     SUM(Amount) TotalSales
 FROM SalesAmazon ama 
-GROUP BY Status, ship_service_level
-ORDER BY Status, ship_service_level;
+GROUP BY Status
+ORDER BY Status;
 
--- Question 9: Popular products sales on Amazon
+-- Question 9: Most popular products on Amazon
 
-SELECT PRO.Category, ama.Size, SUM(Qty) TotalQuantity, ROUND(SUM(Amount),2) TotalSales
+SELECT PRO.Category, ama.Size, 
+    SUM(Qty) TotalQuantity, 
+    ROUND(SUM(Amount),2) TotalSales
 FROM SalesAmazon ama 
 JOIN Products pro 
 ON ama.sku = pro.SKU_Code 
 GROUP BY pro.Category, ama.Size
 ORDER BY TotalSales desc;
 
--- Question 10: Order distribution between B2B and B2C
+-- Question 10: Distribution of orders between B2B and B2C customers
 
 WITH sorted_tbl as (
     SELECT B2B, 
@@ -33,7 +34,7 @@ SELECT *,
     round(cast(NumberOrders as float) / sum(NumberOrders) over(), 2) Percent_orders
 FROM sorted_tbl
 
--- Question 11: Percentage of orders by status and fulfilment methods
+-- Question 11: Percentage of orders affected by status and fulfillment methods
 
 WITH TBL AS (
     SELECT 
@@ -50,7 +51,7 @@ SELECT *,
 FROM TBL
 ORDER BY Fulfilment, percent_by_fulfilment DESC;
 
--- Question 12: Percentage of number orders of Amazon and Mercahnt by State.
+-- Question 12: Order percentages for Amazon and merchant by state
 
 WITH City as (
     SELECT ship_state, Fulfilment, count(Order_ID) as NumberOrders 
@@ -60,9 +61,9 @@ WITH City as (
 SELECT *, 
     concat(round(100* cast(NumberOrders as float) / SUM(NumberOrders) OVER (PARTITION BY ship_state), 2), '%') as 'Percentage_state'
 FROM City
-ORDER BY ship_state
+ORDER BY ship_state;
 
--- Question 13:  Extract the states that only Amazon or Merchant fulfilment
+-- Question 13: States with only Amazon or Merchant fulfillment
 
 WITH City as (
     SELECT ship_state, Fulfilment, count(Order_ID) as NumberOrders 
@@ -80,9 +81,9 @@ WHERE ship_state in
     (SELECT ship_state
     FROM rank
     GROUP BY ship_state
-    HAVING count(rank) = 1)
+    HAVING count(rank) = 1);
 
--- Question 14: Recent number of days that customers place orders from the last orders
+-- Question 14: Days since last customer order
 
 WITH TBL_SORT AS ( 
     SELECT Date, CustomerName,
@@ -109,17 +110,15 @@ FROM TBL_FINAL
 WHERE Date_difference IS NOT NULL
 ORDER BY RecentOrderDate DESC, TotalOrders DESC, Date_difference;
 
--- Question 15: Extract the average order quantity and amount of sales for each products group by month, year. discover the products that out of stock and overstock
+-- Question 15: Monthly quantity of items ordered and current stock levels
 
-/* CREATE VIEW Sale_figures_month AS */
-
+CREATE VIEW Sale_figures_month AS
 WITH NAT AS (
     SELECT 
         SKU,
         MONTH(Date) AS Month,
         YEAR(Date) AS Year,
-        SUM(Qty) AS qty, 
-        SUM(Amount) AS TotalSalesA
+        SUM(Qty) AS qty
     FROM SalesAmazon
     WHERE Courier_Status = 'Shipped'
     GROUP BY MONTH(Date), YEAR(Date), SKU
@@ -129,8 +128,7 @@ INT AS (
         SKU,
         MONTH(Date) AS Month,
         YEAR(Date) AS Year,
-        SUM(Qty) AS Quantity,
-        SUM(TotalAmount) AS Total_sale
+        SUM(Qty) AS Quantity
     FROM SalesGlobal2022 
     GROUP BY MONTH(Date), YEAR(Date), SKU
 )
@@ -138,18 +136,21 @@ SELECT COALESCE(INT.SKU, NAT.SKU) AS SKU,
     COALESCE(INT.Month, NAT.Month) AS Month,
     COALESCE(INT.Year, NAT.Year) AS Year,
     COALESCE(INT.Quantity, 0) AS QuanIn,
-    COALESCE(INT.Total_sale, 0) AS SaleIn,
-    COALESCE(NAT.qty, 0) AS QuanNa,
-    COALESCE(NAT.TotalSalesA, 0) AS SaleNa
+    COALESCE(NAT.qty, 0) AS QuanNa
 FROM INT
 FULL JOIN NAT
     ON NAT.Month = INT.Month AND NAT.Year = INT.Year;
 
 /* Extract the stock number of each products, order by recent month, and year */
-
-SELECT Month, Year, SKU, Category, Stock, sum(QuanIn + QuanNa) OrderQuantity, sum(SaleIn + SaleNa) AmountSales
+with tbl as (
+SELECT Month, Year, SKU, Category, Stock, sum(QuanIn + QuanNa) OrderQuantity
 FROM Sale_figures_month sal
 JOIN Products pro
     ON sal.SKU = pro.SKU_Code
 GROUP BY Month, Year, Category, Stock, SKU
-ORDER BY YEAR DESC, MONTH DESC, Stock
+order by OrderQuantity, stock desc
+)
+select 
+    count(case when Stock = 0 then 1 end) out_stock,
+    count(case when stock <10 then 1 end) low_stock
+from tbl
