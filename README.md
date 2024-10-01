@@ -1,4 +1,4 @@
-# E-commerce sales analysis
+# Clothing e-commerce analysis
 ![image.jpg](https://github.com/Aimee-Le/e_commerce_sale_analysis/blob/main/logosale.png)
 
 ## Overview
