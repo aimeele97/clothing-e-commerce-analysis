@@ -20,7 +20,7 @@ This project analyzes Janasia, an e-commerce clothing store based in India, **th
 ## Findings and Conclusion
 
 - The international revenue reached INR 32.9M from June 2021 to May 2022, with October 2021 as the best month at $6.25M. 
-- National sales totaled INR 71 million from March to June 2022, peaking in April at INR 26.3 million. Mulberries Boutique accounted for 12% of international revenue. 
+- National sales totaled INR 71M from March to June 2022, peaking in April at INR 26.3M. Mulberries Boutique accounted for 12% of international revenue. 
 - Fulfillment methods include Amazon (82,051 expedited orders) and Janasia (36,725 standard orders). 
 - 9 percent of national orders were canceled, primarily by B2C customers, with the Western dress being the most canceled item. 
 - National revenue surpassed international in April 2022 and May 2022. Kurta and Kurta sets were the top domestic sellers, while jumpsuits and cardigans lagged. 
